@@ -1,0 +1,278 @@
+/* ==========================================================================
+   Fleek — Colors & Type
+   Reseller-first. Confident, modern, type-first.
+   Source: michellefleek/design-system-web (Figma Foundation extraction).
+   ========================================================================== */
+
+/* -------- Fonts -------- */
+@font-face {
+  font-family: "Montserrat";
+  src: url("fonts/Montserrat-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("fonts/Montserrat-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("fonts/Montserrat-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("fonts/Montserrat-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("fonts/Montserrat-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("fonts/Montserrat-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ----- Core brand colors ----- */
+  --color-sunflower: #F8C642;         /* primary brand */
+  --color-sunflower-700: #FFDB7E;
+  --color-sunflower-400: #FCE4AA;
+  --color-sunflower-200: #FEF2D4;
+
+  --color-marigold: #E88239;          /* secondary */
+  --color-marigold-700: #EC9D69;
+  --color-marigold-400: #F5C6A7;
+  --color-marigold-200: #F9E2D1;
+
+  --color-bluebell: #6071D7;          /* tertiary / links */
+  --color-bluebell-700: #8491DF;
+  --color-bluebell-400: #B7BFEC;
+  --color-bluebell-200: #DADFF6;
+
+  --color-signal-yellow: #FFD400;     /* accents / hype */
+  --color-signal-yellow-700: #FFE066;
+  --color-signal-yellow-400: #FFF0B3;
+  --color-signal-yellow-200: #FFF9E6;
+
+  --color-vibrant-orange: #F25C2A;    /* accents */
+  --color-vibrant-orange-700: #F78A63;
+  --color-vibrant-orange-400: #FBC3AE;
+  --color-vibrant-orange-200: #FDE8DF;
+
+  --color-electric-blue: #0D2BFF;     /* accents */
+  --color-electric-blue-700: #4D63FF;
+  --color-electric-blue-400: #9AA6FF;
+  --color-electric-blue-200: #E4E8FF;
+
+  --color-cream: #F6F1E7;             /* warm surface */
+  --color-cream-700: #F8F3EB;
+  --color-cream-400: #F9F6EE;
+  --color-cream-200: #FBF8F2;
+
+  /* ----- Semantic colors ----- */
+  --color-green: #12B76A;
+  --color-green-700: #4FC68C;
+  --color-green-400: #96DEBB;
+  --color-green-200: #CAEFDD;
+
+  --color-red: #F04438;
+  --color-red-700: #F47169;
+  --color-red-400: #F8ABA5;
+  --color-red-200: #FCD5D1;
+
+  /* ----- Neutrals ----- */
+  --color-grey-100: #F9FAFB;
+  --color-grey-200: #F2F4F7;
+  --color-grey-300: #EAECF0;
+  --color-grey-400: #D0D5DD;
+  --color-grey-500: #98A2B3;
+  --color-grey-600: #667085;
+  --color-grey-700: #475467;
+  --color-grey-800: #344054;
+  --color-grey-900: #222832;
+  --color-grey-950: #0F0F0F;
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+
+  /* ----- Semantic: background ----- */
+  --bg-default: var(--color-white);
+  --bg-inverted: var(--color-black);
+  --bg-surface: var(--color-grey-100);
+  --bg-surface-warm: var(--color-cream);
+  --bg-brand-primary: var(--color-sunflower);
+  --bg-brand-secondary: var(--color-marigold);
+  --bg-brand-tertiary: var(--color-bluebell);
+  --bg-success: var(--color-green);
+  --bg-error: var(--color-red);
+  --bg-warning: var(--color-marigold);
+
+  /* ----- Semantic: foreground ----- */
+  --fg-default: var(--color-black);
+  --fg-muted: var(--color-grey-600);
+  --fg-subtle: var(--color-grey-500);
+  --fg-inverted: var(--color-white);
+  --fg-disabled: var(--color-grey-500);
+  --fg-success: var(--color-green);
+  --fg-error: var(--color-red);
+  --fg-link: var(--color-bluebell);
+
+  /* ----- Semantic: border ----- */
+  --border-default: var(--color-black);
+  --border-muted: var(--color-grey-300);
+  --border-strong: var(--color-grey-400);
+  --border-inverted: var(--color-white);
+
+  /* ----- Spacing (t-shirt) ----- */
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 40px;
+  --space-xxxl: 48px;
+
+  /* ----- Radius ----- */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 24px;
+  --radius-full: 999px;
+
+  /* ----- Shadows ----- */
+  --shadow-sm: 0 0 8px rgba(0, 0, 0, 0.06);
+  --shadow: 0 0 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* ----- Type: family ----- */
+  --font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ----- Type: sizes ----- */
+  --fs-display: 56px;    /* hero moments */
+  --fs-title-1: 36px;
+  --fs-title-2: 28px;
+  --fs-title-3: 24px;
+  --fs-title-4: 20px;
+  --fs-heading: 18px;
+  --fs-subheading: 18px;
+  --fs-body: 16px;
+  --fs-footnote: 14px;
+  --fs-caption: 12px;
+  --fs-overline: 10px;
+
+  /* ----- Type: line-heights ----- */
+  --lh-tight: 1.1;
+  --lh-display: 1.05;
+  --lh-title: 1.3;
+  --lh-heading: 1.4;
+  --lh-body: 1.5;
+
+  /* ----- Type: weights ----- */
+  --fw-regular: 400;    /* body emphasis: regular = 500 in this system */
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+  --fw-black: 900;
+}
+
+/* -------- Base resets / semantic elements -------- */
+html, body {
+  font-family: var(--font-family);
+  color: var(--fg-default);
+  background: var(--bg-default);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, .h1 {
+  font-family: var(--font-family);
+  font-size: var(--fs-title-1);
+  line-height: var(--lh-title);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+h2, .h2 {
+  font-size: var(--fs-title-2);
+  line-height: var(--lh-title);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+h3, .h3 {
+  font-size: var(--fs-title-3);
+  line-height: var(--lh-heading);
+  font-weight: var(--fw-bold);
+  margin: 0;
+}
+h4, .h4 {
+  font-size: var(--fs-title-4);
+  line-height: var(--lh-heading);
+  font-weight: var(--fw-bold);
+  margin: 0;
+}
+.heading {
+  font-size: var(--fs-heading);
+  line-height: var(--lh-heading);
+  font-weight: var(--fw-bold);
+}
+p, .body {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: var(--fw-medium);
+  margin: 0;
+}
+.footnote {
+  font-size: var(--fs-footnote);
+  line-height: var(--lh-body);
+  font-weight: var(--fw-medium);
+}
+.caption {
+  font-size: var(--fs-caption);
+  line-height: 1.4;
+  font-weight: var(--fw-medium);
+  color: var(--fg-muted);
+}
+.overline {
+  font-size: var(--fs-overline);
+  line-height: 1.4;
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.display {
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -0.02em;
+}
+code, kbd, samp {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+}
+a {
+  color: var(--fg-link);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
