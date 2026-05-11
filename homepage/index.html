@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Homepage — prototypes</title>
+  <link rel="stylesheet" href="../design-guidelines/colors_and_type.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 48px;
+      background: var(--bg-surface);
+      min-height: 100vh;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 48px;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .frame-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+    /* Scale the iOS device so the whole phone fits in the viewport.
+       The wrapper reserves the scaled-down bounding box; the inner div
+       transforms from top-left so layout flows correctly. Click to
+       toggle between fit-to-view (0.65) and full size (1). */
+    .frame-scaler {
+      width: calc(402px * var(--scale, 0.65));
+      height: calc(874px * var(--scale, 0.65));
+      position: relative;
+      cursor: zoom-in;
+      transition: width 180ms ease, height 180ms ease;
+    }
+    .frame-scaler.is-full {
+      cursor: zoom-out;
+      --scale: 1;
+    }
+    .frame-scaler > div {
+      transform: scale(var(--scale, 0.65));
+      transform-origin: top left;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: transform 180ms ease;
+    }
+    .frame-label {
+      font-family: var(--font-family);
+      font-size: var(--fs-footnote);
+      font-weight: var(--fw-semibold);
+      color: var(--fg-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- Shared iOS frame primitives -->
+  <script type="text/babel" data-presets="react" src="../rules/ios-frame.jsx"></script>
+
+  <!-- Core screen -->
+  <script type="text/babel" data-presets="react" src="core.jsx"></script>
+
+  <!-- Variants — add new lines as you create files in variants/ -->
+  <!-- <script type="text/babel" data-presets="react" src="variants/a.jsx"></script> -->
+
+  <!-- Gallery: renders everything registered in window.__homeScreens -->
+  <script type="text/babel" data-presets="react">
+    function Frame({ name, Component }) {
+      const [full, setFull] = React.useState(false);
+      return (
+        <div className="frame-wrap">
+          <div className="frame-label">{name}</div>
+          <div
+            className={'frame-scaler' + (full ? ' is-full' : '')}
+            onClick={() => setFull(f => !f)}
+          >
+            <div>
+              <IOSDevice>
+                <Component />
+              </IOSDevice>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    function Gallery() {
+      const screens = window.__homeScreens || [];
+      return (
+        <div className="gallery">
+          {screens.map(({ name, Component }) => (
+            <Frame key={name} name={name} Component={Component} />
+          ))}
+        </div>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById('root')).render(<Gallery />);
+  </script>
+</body>
+</html>
