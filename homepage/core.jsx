@@ -1,7 +1,8 @@
 // core.jsx — Fleek consumer homepage (Feed tab) — baseline.
 // Variants in variants/ follow the same registration pattern.
 
-function HomeCore() {
+function HomeCore(props) {
+  const carousel = props && props.carousel;
   const filters = [
     { label: 'BETA', selected: true },
     { label: 'Build a Bundle' },
@@ -239,97 +240,8 @@ function HomeCore() {
           </div>
         </div>
 
-        {/* Supplier Carousel — Figma 132:1182 */}
-        <div style={{
-          background: '#F2F4F7',
-          padding: '16px 16px 24px',
-          marginTop: 14,
-        }}>
-          <div style={{ marginBottom: 12 }}>
-            <div style={{
-              fontFamily: 'Montserrat, sans-serif',
-              fontSize: 16, fontWeight: 700, lineHeight: 1.5,
-              color: '#000',
-            }}>Title</div>
-            <div style={{
-              fontFamily: 'Montserrat, sans-serif',
-              fontSize: 14, fontWeight: 500, lineHeight: 1.5,
-              color: '#667085',
-            }}>Subtitle</div>
-          </div>
-          <div style={{
-            display: 'flex', gap: 12,
-            overflowX: 'auto', scrollbarWidth: 'none',
-            margin: '0 -16px', padding: '0 16px',
-          }}>
-            {[0, 1, 2].map(c => (
-              <div key={c} style={{
-                background: '#fff',
-                padding: '12px 16px',
-                borderRadius: 8,
-                display: 'flex', flexDirection: 'column', gap: 12,
-                flexShrink: 0,
-              }}>
-                <div style={{
-                  fontFamily: 'Montserrat, sans-serif',
-                  fontSize: 14, fontWeight: 700, lineHeight: 1.5, color: '#000',
-                }}>Title</div>
-                {[0, 1].map(r => (
-                  <div key={r} style={{ display: 'flex', gap: 12 }}>
-                    {[0, 1].map(s => (
-                      <div key={s} style={{ width: 150, display: 'flex', flexDirection: 'column', gap: 4 }}>
-                        <div style={{
-                          width: 150, height: 142,
-                          display: 'grid',
-                          gridTemplateColumns: '1fr 1fr',
-                          gridTemplateRows: '1fr 1fr',
-                          gap: 1.62,
-                          borderRadius: 8,
-                          overflow: 'hidden',
-                        }}>
-                          {[0, 1, 2, 3].map(k => (
-                            <div key={k} style={{
-                              position: 'relative',
-                              border: '1px solid #EAECF0',
-                              overflow: 'hidden',
-                            }}>
-                              <img src="assets/supplier-tile.png" alt="" style={{
-                                position: 'absolute', inset: 0,
-                                width: '100%', height: '100%',
-                                objectFit: 'cover',
-                              }} />
-                            </div>
-                          ))}
-                        </div>
-                        <div>
-                          <div style={{
-                            fontFamily: 'Montserrat, sans-serif',
-                            fontSize: 12, fontWeight: 700, lineHeight: 1.5, color: '#000',
-                          }}>Supplier Name</div>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                              <span style={{
-                                fontFamily: 'Montserrat, sans-serif',
-                                fontSize: 12, fontWeight: 500, lineHeight: 1.5, color: '#667085',
-                              }}>X.X</span>
-                              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                <path d="M7 1.5l1.65 3.34 3.7.54-2.67 2.6.63 3.69L7 9.93l-3.31 1.74.63-3.69-2.67-2.6 3.7-.54L7 1.5z" fill="#F8C642"/>
-                              </svg>
-                            </div>
-                            <span style={{
-                              fontFamily: 'Montserrat, sans-serif',
-                              fontSize: 12, fontWeight: 500, lineHeight: 1.5, color: '#667085',
-                            }}>(XXX)</span>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Carousel slot — defaults to Supplier Carousel, can be overridden via prop */}
+        {carousel || <DefaultSupplierCarousel />}
 
         {/* Catalogue — Figma 132:712 */}
         <div style={{
@@ -339,66 +251,6 @@ function HomeCore() {
           overflowX: 'auto',
           scrollbarWidth: 'none',
         }}>
-          {/* Recommended For You — special tile (matches 2-row column height) */}
-          <div style={{
-            position: 'relative',
-            width: 140,
-            flexShrink: 0,
-            borderRadius: 8,
-            boxShadow: 'inset 0 0 0 1px #EAECF0',
-            overflow: 'hidden',
-            background: '#282828',
-          }}>
-            {/* 2x2 image grid */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
-              {recImages.map((src, i) => (
-                <div key={i} style={{
-                  position: 'relative',
-                  width: 70,
-                  height: 104,
-                  border: '1px solid #fff',
-                  boxSizing: 'border-box',
-                  flexShrink: 0,
-                  overflow: 'hidden',
-                }}>
-                  <img src={src} alt="" style={{
-                    position: 'absolute', inset: 0,
-                    width: '100%', height: '100%',
-                    objectFit: 'cover',
-                  }} />
-                  {i === 0 && (
-                    <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.2)' }} />
-                  )}
-                </div>
-              ))}
-            </div>
-            {/* Dark gradient overlay */}
-            <div style={{
-              position: 'absolute', inset: 0,
-              background: 'linear-gradient(to bottom, rgba(0,0,0,0) 14%, #282828 100%)',
-              pointerEvents: 'none',
-            }} />
-            {/* Text block */}
-            <div style={{
-              position: 'absolute', bottom: 11, left: 12, right: 12,
-            }}>
-              <div style={{
-                fontFamily: 'Montserrat, sans-serif',
-                fontWeight: 700, fontSize: 12, lineHeight: 1.5,
-                color: '#12B76A',
-              }}>
-                Up to 40% Off
-              </div>
-              <div style={{
-                fontFamily: 'Montserrat, sans-serif',
-                fontWeight: 800, fontSize: 14, lineHeight: 1.2,
-                color: '#fff',
-              }}>
-                Recommended For You
-              </div>
-            </div>
-          </div>
-
           {/* Stacked columns of 2 small tiles each (140x100) */}
           {tileColumns.map((col, ci) => (
             <div key={ci} style={{
@@ -560,4 +412,100 @@ function HomeCore() {
   );
 }
 
-(window.__homeScreens ||= []).push({ name: 'Core', Component: HomeCore });
+// Default supplier carousel — used when no `carousel` prop is provided.
+// Figma 132:1182.
+function DefaultSupplierCarousel() {
+  return (
+    <div style={{
+      background: '#F2F4F7',
+      padding: '16px 16px 24px',
+      marginTop: 14,
+    }}>
+      <div style={{ marginBottom: 12 }}>
+        <div style={{
+          fontFamily: 'Montserrat, sans-serif',
+          fontSize: 16, fontWeight: 700, lineHeight: 1.5, color: '#000',
+        }}>Title</div>
+        <div style={{
+          fontFamily: 'Montserrat, sans-serif',
+          fontSize: 14, fontWeight: 500, lineHeight: 1.5, color: '#667085',
+        }}>Subtitle</div>
+      </div>
+      <div style={{
+        display: 'flex', gap: 12,
+        overflowX: 'auto', scrollbarWidth: 'none',
+        margin: '0 -16px', padding: '0 16px',
+      }}>
+        {[0, 1, 2].map(c => (
+          <div key={c} style={{
+            background: '#fff',
+            padding: '12px 16px',
+            borderRadius: 8,
+            display: 'flex', flexDirection: 'column', gap: 12,
+            flexShrink: 0,
+          }}>
+            <div style={{
+              fontFamily: 'Montserrat, sans-serif',
+              fontSize: 14, fontWeight: 700, lineHeight: 1.5, color: '#000',
+            }}>Title</div>
+            {[0, 1].map(r => (
+              <div key={r} style={{ display: 'flex', gap: 12 }}>
+                {[0, 1].map(s => (
+                  <div key={s} style={{ width: 150, display: 'flex', flexDirection: 'column', gap: 4 }}>
+                    <div style={{
+                      width: 150, height: 142,
+                      display: 'grid',
+                      gridTemplateColumns: '1fr 1fr',
+                      gridTemplateRows: '1fr 1fr',
+                      gap: 1.62,
+                      borderRadius: 8,
+                      overflow: 'hidden',
+                    }}>
+                      {[0, 1, 2, 3].map(k => (
+                        <div key={k} style={{
+                          position: 'relative',
+                          border: '1px solid #EAECF0',
+                          overflow: 'hidden',
+                        }}>
+                          <img src="assets/supplier-tile.png" alt="" style={{
+                            position: 'absolute', inset: 0,
+                            width: '100%', height: '100%',
+                            objectFit: 'cover',
+                          }} />
+                        </div>
+                      ))}
+                    </div>
+                    <div>
+                      <div style={{
+                        fontFamily: 'Montserrat, sans-serif',
+                        fontSize: 12, fontWeight: 700, lineHeight: 1.5, color: '#000',
+                      }}>Supplier Name</div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                          <span style={{
+                            fontFamily: 'Montserrat, sans-serif',
+                            fontSize: 12, fontWeight: 500, lineHeight: 1.5, color: '#667085',
+                          }}>X.X</span>
+                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <path d="M7 1.5l1.65 3.34 3.7.54-2.67 2.6.63 3.69L7 9.93l-3.31 1.74.63-3.69-2.67-2.6 3.7-.54L7 1.5z" fill="#F8C642"/>
+                          </svg>
+                        </div>
+                        <span style={{
+                          fontFamily: 'Montserrat, sans-serif',
+                          fontSize: 12, fontWeight: 500, lineHeight: 1.5, color: '#667085',
+                        }}>(XXX)</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Expose so variants in variants/*.jsx can wrap HomeCore with a custom carousel.
+window.HomeCore = HomeCore;

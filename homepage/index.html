@@ -66,13 +66,23 @@
   <div id="root"></div>
 
   <!-- Shared iOS frame primitives -->
-  <script type="text/babel" data-presets="react" src="../rules/ios-frame.jsx"></script>
+  <script type="text/babel" data-presets="react" src="../rules/ios-frame.jsx?v=29"></script>
 
   <!-- Core screen -->
-  <script type="text/babel" data-presets="react" src="core.jsx"></script>
+  <script type="text/babel" data-presets="react" src="core.jsx?v=29"></script>
 
-  <!-- Variants — add new lines as you create files in variants/ -->
-  <!-- <script type="text/babel" data-presets="react" src="variants/a.jsx"></script> -->
+  <!-- Variants — shared helper must load first -->
+  <script type="text/babel" data-presets="react" src="variants/_shared.jsx?v=29"></script>
+  <script type="text/babel" data-presets="react" src="variants/by-stage.jsx?v=29"></script>
+  <!-- <script type="text/babel" data-presets="react" src="variants/on-load.jsx?v=29"></script> -->
+  <!-- <script type="text/babel" data-presets="react" src="variants/skeleton-rec.jsx?v=29"></script> -->
+  <!-- Other variants (uncomment to enable):
+  <script type="text/babel" data-presets="react" src="variants/by-brand.jsx?v=29"></script>
+  <script type="text/babel" data-presets="react" src="variants/by-category.jsx?v=29"></script>
+  <script type="text/babel" data-presets="react" src="variants/smart-mix.jsx?v=29"></script>
+  <script type="text/babel" data-presets="react" src="variants/themes.jsx?v=29"></script>
+  <script type="text/babel" data-presets="react" src="variants/skeleton.jsx?v=29"></script>
+  -->
 
   <!-- Gallery: renders everything registered in window.__homeScreens -->
   <script type="text/babel" data-presets="react">
