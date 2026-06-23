@@ -76,29 +76,23 @@
   <!-- Shared iOS frame primitives -->
   <script type="text/babel" data-presets="classic-react" src="../rules/ios-frame.jsx?v=2"></script>
 
-  <!-- Baseline screen -->
+  <!-- Shared building blocks (SS namespace: avatar, tabs, filter, feed, nav…) -->
   <script type="text/babel" data-presets="classic-react" src="core.jsx?v=3"></script>
 
-  <!-- Theme: Visual-led hero (operation-aware hero + toggle) -->
+  <!-- Single storefront, organised into tappable sections with per-section variants -->
+  <script type="text/babel" data-presets="classic-react" src="sections.jsx?v=7"></script>
+
+  <!-- Archived theme-based explorations (replaced by the section model):
   <script type="text/babel" data-presets="classic-react" src="integrated.jsx?v=5"></script>
-
-  <!-- Upcoming theme stubs (trust, story, merch, find) -->
   <script type="text/babel" data-presets="classic-react" src="themes-upcoming.jsx?v=2"></script>
-
-  <!-- Theme shell: top-level theme switcher -->
   <script type="text/babel" data-presets="classic-react" src="shell.jsx?v=2"></script>
-
-  <!-- Compact-header comparison (exploration archive — F2 chosen, folded into integrated.jsx)
   <script type="text/babel" data-presets="classic-react" src="variants/compact-header.jsx?v=2"></script>
-  -->
-
-  <!-- Explorations (8 visual-led heroes) — kept for reference, not loaded.
   <script type="text/babel" data-presets="classic-react" src="variants/visual-led.jsx?v=3"></script>
   -->
 
-  <!-- Render the theme shell -->
+  <!-- Render the sectioned storefront -->
   <script type="text/babel" data-presets="classic-react">
-    ReactDOM.createRoot(document.getElementById('root')).render(<ThemeShell />);
+    ReactDOM.createRoot(document.getElementById('root')).render(<StorefrontSections />);
   </script>
 </body>
 </html>
