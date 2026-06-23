@@ -17,6 +17,21 @@
     }} />
   );
 
+  // Autoplay/muted/looping video slide (used as the first slide of the gallery hero).
+  const VideoSlide = ({ style = {} }) => (
+    <div style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#000', ...style }}>
+      <video src="assets/hero-clip.mp4" autoPlay muted loop playsInline
+        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+      <div style={{ position: 'absolute', bottom: 10, left: 10, display: 'flex', alignItems: 'center', gap: 6, height: 24, padding: '0 9px', borderRadius: 999, background: 'rgba(0,0,0,0.5)' }}>
+        <i className="ph-fill ph-play" style={{ fontSize: 11, color: '#fff' }} />
+        <span style={{ fontFamily: F, fontWeight: 700, fontSize: 10, color: '#fff', letterSpacing: 0.4 }}>VIDEO</span>
+      </div>
+      <div style={{ position: 'absolute', bottom: 10, right: 10 }}>
+        <i className="ph-fill ph-speaker-simple-slash" style={{ fontSize: 15, color: '#fff' }} />
+      </div>
+    </div>
+  );
+
   const StatusSpacer = ({ h = 50 }) => <div style={{ height: h, flexShrink: 0 }} />;
   const scrim = 'linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.78) 100%)';
 
@@ -31,6 +46,40 @@
     </div>
   );
 
+  // ── Faire-style header (chosen: F2) — small-operation storefront ──
+  const Star = ({ size = 13 }) => <i className="ph-fill ph-star" style={{ fontSize: size, color: C.sunflower }} />;
+  const Mid = () => <span style={{ color: C.borderStrong }}>·</span>;
+  const bld = { color: C.text, fontWeight: 700 };
+  function FaireHeader() {
+    return (
+      <div style={{ padding: '12px 12px 12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <SupplierAvatar size={48} />
+          <div style={{ minWidth: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              <span style={{ fontFamily: F, fontWeight: 700, fontSize: 18, color: C.text, lineHeight: '22px' }}>Creed Vintage</span>
+              <i className="ph ph-caret-right" style={{ fontSize: 13, color: C.muted }} />
+            </div>
+            <div style={{ marginTop: 4, display: 'flex', alignItems: 'center', gap: 8, fontFamily: F, fontSize: 13 }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: 4, color: C.text, fontWeight: 600 }}><i className="ph-fill ph-seal-check" style={{ fontSize: 14 }} />Top supplier</span>
+              <Mid />
+              <span style={{ display: 'flex', alignItems: 'center', gap: 3, color: C.muted }}><Star /><b style={bld}>4.4</b> (123)</span>
+            </div>
+          </div>
+        </div>
+        <div style={{ marginTop: 9, display: 'flex', flexDirection: 'column', gap: 4, fontFamily: F, fontSize: 13, color: C.muted }}>
+          <div><b style={bld}>£50 min</b> · 🇵🇰 Pakistan</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <i className="ph ph-truck" style={{ fontSize: 15, color: C.text }} />
+            <span><b style={bld}>Dispatches in 8 days</b></span>
+            <Mid />
+            <span style={{ color: C.text, textDecoration: 'underline' }}>Shipping details</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // ── SMALL: swipeable image gallery hero ───────────────────────────
   function HeroGallery() {
     const seeds = ['creed-g1', 'creed-g2', 'creed-g3', 'creed-g4'];
@@ -42,7 +91,9 @@
           <div style={{ display: 'flex', overflowX: 'auto', scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}>
             {seeds.map((s, i) => (
               <div key={s} style={{ position: 'relative', flex: '0 0 88%', scrollSnapAlign: 'start', height: 248, paddingLeft: i === 0 ? 12 : 6, paddingRight: i === seeds.length - 1 ? 12 : 6, boxSizing: 'border-box' }}>
-                <Photo seed={s} style={{ height: '100%', width: '100%', borderRadius: 12 }} />
+                {i === 0
+                  ? <VideoSlide style={{ height: '100%', width: '100%', borderRadius: 12 }} />
+                  : <Photo seed={s} style={{ height: '100%', width: '100%', borderRadius: 12 }} />}
               </div>
             ))}
           </div>
@@ -56,7 +107,6 @@
             ))}
           </div>
         </div>
-        <IdentityRow />
       </React.Fragment>
     );
   }
@@ -112,10 +162,12 @@
 
   // ── Full screen: hero (by operation) + shared baseline body ───────
   function SupplierScreen({ operation }) {
+    const large = operation === 'large';
     return (
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column', background: C.white }}>
-        {operation === 'large' ? <HeroVideo /> : <HeroGallery />}
-        <MetricsRow />
+        {large ? <HeroVideo /> : <HeroGallery />}
+        {/* small uses the compact Faire-style header; large keeps overlaid identity + metrics */}
+        {large ? <MetricsRow /> : <FaireHeader />}
         <Tabs />
         <div style={{ flex: 1, overflowY: 'auto' }}>
           <FilterBar />
@@ -154,15 +206,15 @@
   }
 
   function IntegratedApp() {
-    const [op, setOp] = React.useState('small');
+    // Large operation parked — render the single (small) storefront.
+    // The Small/Large toggle + HeroVideo are kept above for easy restore.
     const scale = 0.82;
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 28 }}>
-        <OperationToggle value={op} onChange={setOp} />
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <div style={{ width: 402 * scale, height: 874 * scale, position: 'relative' }}>
           <div style={{ transform: `scale(${scale})`, transformOrigin: 'top left', position: 'absolute', top: 0, left: 0 }}>
             <IOSDevice>
-              <SupplierScreen operation={op} />
+              <SupplierScreen operation="small" />
             </IOSDevice>
           </div>
         </div>
